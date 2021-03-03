@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>show</title>
+    <style>
+        table, td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="/products/find">
+    <input name="id" placeholder="input id">
+    <input type="submit" value="Search">
+</form>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Description</td>
+        <td colspan="2"><a th:href="@{/products/create}">Create new</a></td>
+    </tr>
+    <th:block th:each="product: ${list}">
+        <tr>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.description}"></td>
+            <td><a th:href="@{/products/edit(id=${product.id})}">Edit</a></td>
+            <td><a onclick="return confirm('are you sure?')" th:href="@{/products/delete(id=${product.id})}">Delete</a></td>
+
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
